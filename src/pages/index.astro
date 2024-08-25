@@ -12,29 +12,53 @@ import Card from '../components/Card.astro';
 		</head>
 		
 		<body>
-			<h1 class="text-white font-bold text-6xl text-center p-20">IP DATA SEARCHER</h1>
+			<h1 class="text-white font-bold text-4xl md:text-6xl text-center p-20">IP DATA SEARCHER</h1>
 		
-			<main class="mx-auto items-center text-center ">
+			<main class="mx-auto items-center text-center">
 					<form id="form" class="text-white">
 
-						<label class="">
-							IP:
-							<input class="text-black" required id="input" type="text" 
-							placeholder="Introduce la IP">
-							<small class="grid">Por ejemplo: 54.192.189.0</small>
-						</label>
+						<div class="w-60 h-12 relative flex rounded-xl mx-auto">
+							<input
+								required=""
+								class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl border border-sky-600 focus:shadow-md"
+								id="input"
+								type="text"
+							/>
+							<label
+								class="absolute top-1/2 translate-y-[-50%] bg-[#13151a] left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-sky-600 peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-sky-600 duration-150"
+								for="address"
+							>
+								Introduce una IP:</label
+							>
+						</div>
 
-			
-						<button type="submit" id="submit" class="grid p-4 mx-auto bg-sky-500 font-bold 
-						hover:bg-sky-700 hover:scale-110 transition-all duration-500 ">
-							Buscar información de esta IP
-						</button>
-						
+						<div class="p-5">
+							<button
+								class="overflow-hidden relative w-32 p-2 h-12 bg-sky-950 text-white border-none rounded-md text-xl font-bold cursor-pointer z-10 group"
+								type="submit"
+								id="submit"
+							>
+								Search IP
+								<span
+									class="absolute w-36 h-32 -top-8 -left-2 bg-sky-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-right"
+								></span>
+								<span
+									class="absolute w-36 h-32 -top-8 -left-2 bg-sky-400 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-right"
+								></span>
+								<span
+									class="absolute w-36 h-32 -top-8 -left-2 bg-sky-600 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-right"
+								></span>
+								<span
+									class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10"
+									>Explore!</span
+								>
+							</button>
+						</div>
 					</form>
 
-				<div class="bg-white text-black">
-					<pre id="results"></pre>
-				</div>
+					<div class="rounded-lg shadow-lg max-w-2xl mx-auto mt-4 bg-[#262626] scroll-mx-52">
+						<pre id="results" class="justify-start text-left text-white"></pre>
+					</div>
 			</main>
 
 			<script>
@@ -91,8 +115,9 @@ import Card from '../components/Card.astro';
 				}
 			</script>
 			
-			
-			
 		</body>
-		</html>
+	</html>
 </Layout>
+
+
+
