@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Footer from '../components/footer.astro';
 ---
 
-<Layout title="IP DATA SEARCHER">
+<Layout title="IP Data Searcher">
 	<html lang="es">
 		<head>
 			<meta charset="UTF-8">
@@ -11,7 +12,7 @@ import Card from '../components/Card.astro';
 			<title>IP Data Searcher</title>
 		</head>
 		
-		<body>
+		<body class="flex flex-col">
 			<h1 class="text-white font-bold text-4xl md:text-6xl text-center p-20">IP DATA SEARCHER</h1>
 		
 			<main class="mx-auto items-center text-center">
@@ -60,7 +61,7 @@ import Card from '../components/Card.astro';
 						<pre id="results" class="justify-start text-left text-white"></pre>
 					</div>
 			</main>
-
+			<Footer/>
 			<script>
 				const fetchIPInfo = (ip: string): Promise<any> => {
 					return fetch(`https://ip.guide/${ip}`)
