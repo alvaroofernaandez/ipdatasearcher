@@ -36,6 +36,63 @@ import Card from '../components/Card.astro';
 					<pre id="results"></pre>
 				</div>
 			</main>
+
+			<script>
+				const fetchIPInfo = (ip: string): Promise<any> => {
+					return fetch(`https://ip.guide/${ip}`)
+						.then(response => {
+							if (!response.ok) {
+								throw new Error('Network response was not ok');
+							}
+							// Devolver JSON o texto
+							return response.json().catch(() => response.text());
+						})
+						.catch(err => console.error('Fetch error:', err));
+				}
+			
+				const $form = document.querySelector<HTMLFormElement>('#form');
+				const $input = document.querySelector<HTMLInputElement>('#input');
+				const $submit = document.querySelector<HTMLButtonElement>('#submit');
+				const $results = document.querySelector<HTMLPreElement>('#results');
+			
+				if ($form && $input && $submit && $results) {
+					$form.addEventListener('submit', async (event) => {
+						event.preventDefault();
+						
+						const value: string = $input.value?.trim();
+						if (!value) return;
+			
+						$submit.setAttribute('disabled', '');
+						$submit.setAttribute('aria-busy', 'true');
+			
+						try {
+							const ipInfo = await fetchIPInfo(value);
+			
+							if (ipInfo) {
+								if (typeof ipInfo === 'string') {
+									$results.innerHTML = `<pre>${ipInfo}</pre>`;
+								} else {
+									$results.innerHTML = `<pre>${JSON.stringify(ipInfo, null, 2)}</pre>`;
+								}
+							}
+						} catch (error: unknown) {
+							let errorMessage = 'An unexpected error occurred';
+							if (error instanceof Error) {
+								errorMessage = error.message;
+							}
+							$results.innerHTML = `<p>Error: ${errorMessage}</p>`;
+						} finally {
+							$submit.removeAttribute('disabled');
+							$submit.removeAttribute('aria-busy');
+						}
+					});
+				} else {
+					console.error("Uno o más elementos no se encontraron en el DOM.");
+				}
+			</script>
+			
+			
+			
 		</body>
 		</html>
 </Layout>
