@@ -1,112 +1,118 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import Footer from '../components/footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import Footer from "../components/footer.astro";
 ---
 
 <Layout title="IP Data Searcher">
-	<html lang="es">
-		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>IP Data Searcher</title>
-		</head>
-		
-		<body class="flex flex-col">
-			<h1 class="text-white font-bold text-4xl md:text-6xl text-center p-20">IP DATA SEARCHER</h1>
-		
-			<main class="mx-auto items-center text-center">
-					<form id="form" class="text-white">
+  <html lang="es">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>IP Data Searcher</title>
+    </head>
 
-						<div class="w-60 h-12 relative flex rounded-xl mx-auto">
-							<input
-								required=""
-								class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl border border-sky-600 focus:shadow-md"
-								id="input"
-								type="text"
-							/>
-							<label
-								class="absolute top-1/2 translate-y-[-50%] bg-[#13151a] left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-sky-600 peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-sky-600 duration-150"
-								for="address"
-							>
-								Introduce una IP:</label
-							>
-						</div>
+    <body class="flex flex-col">
+      <h1 class="text-white font-bold text-4xl md:text-6xl text-center p-20">
+        IP DATA SEARCHER
+      </h1>
 
-						<div class="p-5">
-							<button
-								class="overflow-hidden relative w-32 p-2 h-12 bg-sky-950 text-white border-none rounded-md text-xl font-bold cursor-pointer z-10 group"
-								type="submit"
-								id="submit"
-							>
-								Search IP
-								<span
-									class="absolute w-36 h-32 -top-8 -left-2 bg-sky-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-right"
-								></span>
-								<span
-									class="absolute w-36 h-32 -top-8 -left-2 bg-sky-400 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-right"
-								></span>
-								<span
-									class="absolute w-36 h-32 -top-8 -left-2 bg-sky-600 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-right"
-								></span>
-								<span
-									class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10"
-									>Explore!</span
-								>
-							</button>
-						</div>
-					</form>
-
-					<div class="rounded-lg shadow-lg w-full max-h-max md:max-w-2xl mx-auto mt-4 bg-[#262626]">
-						<pre id="results" class="justify-start text-left text-white"></pre>
+      <main class="mx-auto items-center text-center">
+        <form id="form" class="text-white">
+					<div class="w-60 h-12 relative flex rounded-xl mx-auto">
+						<input
+							required=""
+							class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl border border-sky-600 focus:shadow-md"
+							id="input"
+							type="text"
+						/>
+						<label
+							class="cursor-text absolute top-1/2 translate-y-[-50%] bg-[#13151a] left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-sky-600 peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-sky-600 duration-150"
+							for="address"
+							id="label"
+						>
+							<span>Introduce una IP:</span>
+						</label>
 					</div>
-			</main>
-			<Footer/>
-			<script type="module">
-				const OPTIONS = {
-					method: 'GET',
-					headers: {
-						'X-RapidAPI-Key': 'XXX',
-						'X-RapidAPI-Host': 'YYY'
-					}
-				}
-		
-				const fetchIpInfo = ip => {
-					return fetch(`https://freeipapi.com/api/json/${ip}`, OPTIONS)
-						.then(res => res.json())
-						.catch(err => console.error(err))
-				}
-		
-				const $ = selector => document.querySelector(selector)
-		
-				const $form = $('#form')
-				const $input = $('#input')
-				const $submit = $('#submit')
-				const $results = $('#results')
-		
-				$form.addEventListener('submit', async (event) => {
-					event.preventDefault()
-					const {value} = $input
-					if (!value) return
-		
-					$submit.setAttribute('disabled', '')
-					$submit.setAttribute('aria-busy', 'true')
-		
-					const ipInfo = await fetchIpInfo(value)
-		
-					if (ipInfo) {
-						$results.innerHTML = JSON.stringify(ipInfo, null, 2)
-					}
-		
-					$submit.removeAttribute('disabled')
-					$submit.removeAttribute('aria-busy')
-		
-				})
-			</script>
-			
-		</body>
-	</html>
+
+          <div class="p-5">
+            <button
+              class="overflow-hidden relative w-32 p-2 h-12 bg-sky-950 text-white border-none rounded-md text-xl font-bold cursor-pointer z-10 group"
+              type="submit"
+              id="submit"
+            >
+              Search IP
+              <span
+                class="absolute w-36 h-32 -top-8 -left-2 bg-sky-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-right"
+              ></span>
+              <span
+                class="absolute w-36 h-32 -top-8 -left-2 bg-sky-400 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-right"
+              ></span>
+              <span
+                class="absolute w-36 h-32 -top-8 -left-2 bg-sky-600 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-right"
+              ></span>
+              <span
+                class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10"
+                >Explore!</span
+              >
+            </button>
+          </div>
+        </form>
+
+        <div
+          class="rounded-lg shadow-lg w-full max-h-max md:max-w-2xl mx-auto mt-4 bg-[#262626]"
+        >
+          <pre id="results" class="justify-start text-left text-white"></pre>
+        </div>
+      </main>
+      <Footer />
+
+      <script type="module">
+				const label = document.getElementById('label');
+				const input = document.getElementById('input');
+
+				label.addEventListener('click', () => {
+					input.focus();
+				});
+        const OPTIONS = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key": "XXX",
+            "X-RapidAPI-Host": "YYY",
+          },
+        };
+
+        const fetchIpInfo = (ip) => {
+          return fetch(`https://freeipapi.com/api/json/${ip}`, OPTIONS)
+            .then((res) => res.json())
+            .catch((err) => console.error(err));
+        };
+
+        const $ = (selector) => document.querySelector(selector);
+
+        const $form = $("#form");
+        const $input = $("#input");
+        const $submit = $("#submit");
+        const $results = $("#results");
+
+        $form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const { value } = $input;
+          if (!value) return;
+
+          $submit.setAttribute("disabled", "");
+          $submit.setAttribute("aria-busy", "true");
+
+          const ipInfo = await fetchIpInfo(value);
+
+          if (ipInfo) {
+            $results.innerHTML = JSON.stringify(ipInfo, null, 2);
+          }
+
+          $submit.removeAttribute("disabled");
+          $submit.removeAttribute("aria-busy");
+        });
+      </script>
+    </body>
+  </html>
 </Layout>
-
-
-
