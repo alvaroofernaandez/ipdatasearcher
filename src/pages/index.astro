@@ -27,7 +27,7 @@ import Footer from "../components/footer.astro";
 							type="text"
 						/>
 						<label
-							class="cursor-text absolute top-1/2 translate-y-[-50%] bg-[#13151a] left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-sky-600 peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-sky-600 duration-150"
+							class="cursor-text absolute top-1/2 translate-y-[-50%] peer-focus:bg-[#1c1b22] left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-sky-600 peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-sky-600 duration-150"
 							for="address"
 							id="label"
 						>
@@ -68,12 +68,14 @@ import Footer from "../components/footer.astro";
       <Footer />
 
       <script type="module">
+
 				const label = document.getElementById('label');
 				const input = document.getElementById('input');
 
 				label.addEventListener('click', () => {
 					input.focus();
 				});
+				
         const OPTIONS = {
           method: "GET",
           headers: {
